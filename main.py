@@ -196,9 +196,8 @@ class MarkdownBrowser(App):
     def action_cursor_left(self) -> None:
         """Go to parent directory (h key)."""
         file_tree = self.query_one("#file_tree", FileTree)
-        if file_tree.cursor_node and file_tree.cursor_node.parent:
-            file_tree.cursor_node.parent.expand()
-            file_tree.cursor_node = file_tree.cursor_node.parent
+        file_tree.action_cursor_parent()
+        if file_tree.cursor_node:
             preview = self.query_one("#preview", MarkdownOutline)
             preview.update_preview(Path(file_tree.cursor_node.data.path))
     
