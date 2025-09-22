@@ -206,8 +206,12 @@ class MarkdownBrowser(App):
         """Enter directory or expand (l key)."""
         file_tree = self.query_one("#file_tree", FileTree)
         if file_tree.cursor_node:
-            if file_tree.cursor_node.data.is_dir:
-                file_tree.cursor_node.expand()
+            if Path(file_tree.cursor_node.data.path).is_dir():
+                if not file_tree.cursor_node.is_expanded:
+                    file_tree.cursor_node.expand()
+                # Move cursor to first child if directory has children
+                if file_tree.cursor_node.children:
+                    file_tree.cursor_node = file_tree.cursor_node.children[0]
             preview = self.query_one("#preview", MarkdownOutline)
             preview.update_preview(Path(file_tree.cursor_node.data.path))
     
@@ -215,7 +219,7 @@ class MarkdownBrowser(App):
         """Select file/directory (Enter key)."""
         file_tree = self.query_one("#file_tree", FileTree)
         if file_tree.cursor_node:
-            if file_tree.cursor_node.data.is_dir:
+            if Path(file_tree.cursor_node.data.path).is_dir():
                 file_tree.cursor_node.toggle()
             preview = self.query_one("#preview", MarkdownOutline)
             preview.update_preview(Path(file_tree.cursor_node.data.path))

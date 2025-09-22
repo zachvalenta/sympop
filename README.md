@@ -1,6 +1,17 @@
-# my existing tool
+# what we're trying to build
 
-little tool I have to preview markdown doc headers.
+Basically I want to build a cracked version of yazi (is an interactive file previewer) but have it preview Markdown headers i.e. get a quick look at the *outline* of the doc.
+
+Let's write a TUI with yazi-like functionality but strip it down to:
+
+* can nav dir using vim motions
+* can preview MD files by header; the output will look like the below header ('my existing tool')
+
+Let's use Textual for implementation to start.
+
+# my existing tool (ext)
+
+A little tool I already have to preview markdown doc headers.
 
 ```sh
 #!/usr/bin/env python
@@ -70,15 +81,4 @@ def main(argv):
 if __name__ == "__main__":
     main(sys.argv[1:])
 ```
-
-# what we're trying to build
-
-Here's a screenshot of a tool I love, yazi, which is an interview file previewer.
-
-Let's write yazi but strip it down to:
-
-* can nav dir using vim motions
-* can preview MD files by header i.e. output like the above mentioned CLI I wrote
-
-This should be a TUI. Let's use Textual for implementation to start.
 
